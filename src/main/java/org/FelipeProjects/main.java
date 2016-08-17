@@ -41,7 +41,7 @@ public class main extends Application
             URL url = getClass().getResource("gui/gui.fxml");
             loader.setLocation(url);
 
-            primaryStage.setTitle("Epic fail");
+            primaryStage.setTitle("Red Rbf Gaussiana + Qpso v0.00001");
             Parent root =  loader.load();
             Scene primaryScene = new Scene(root);
 

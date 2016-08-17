@@ -21,6 +21,7 @@ import org.neuroph.nnet.learning.RBFLearning;
 import org.neuroph.util.NeuralNetworkFactory;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -175,8 +176,8 @@ public class controller
 
             int i;
             testExcel = chooser.showOpenDialog(null);
-            if (trainExcel != null)
-                trainExcelTextfield.setText(trainExcel.getPath());
+            if (testExcel != null)
+                testExcelTestfield.setText(testExcel.getPath());
 
         });
 
@@ -225,7 +226,8 @@ public class controller
         Runnable readExcelTask = ()->{
             textArea.setText(textArea.getText().concat("Leyendo Excel de entrenamiento..."));
             testDataset = ReadExcel.readExcel(testExcel.getPath(), featuresList);
-            textArea.setText(textArea.getText().concat("\nExcel de entrenamiento leído\n"));
+            String byteText = textArea.getText().concat("\nExcel de pruebas leido\n");
+            textArea.setText(new String(byteText.getBytes(), StandardCharsets.UTF_8));
         };
         ExecutorService readExcelExecutor = Executors.newSingleThreadExecutor();
         readExcelExecutor.execute(readExcelTask);
@@ -286,7 +288,8 @@ public class controller
             Runnable readExcelTask = ()->{
                 textArea.setText("Leyendo Excel de entrenamiento...");
                 trainDataset = ReadExcel.readExcel(trainExcel.getPath(), featuresList);
-                textArea.setText(textArea.getText().concat("\nExcel de entrenamiento leído\n"));
+                String byteText = textArea.getText().concat("\nExcel de entrenamiento leido\n");
+                textArea.setText(new String(byteText.getBytes(), StandardCharsets.UTF_8));
             };
             ExecutorService readExcelExecutor = Executors.newSingleThreadExecutor();
             readExcelExecutor.execute(readExcelTask);
